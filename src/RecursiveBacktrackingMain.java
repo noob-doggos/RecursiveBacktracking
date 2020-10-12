@@ -40,7 +40,7 @@ public class RecursiveBacktrackingMain
 
     public static void travel(int x, int y)
     {
-        travelHelper(x, y, "");
+        System.out.println(travelHelper(x, y, ""));
     }
 
     public static void main(String[] args)
