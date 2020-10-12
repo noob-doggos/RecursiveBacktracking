@@ -92,9 +92,9 @@ public class RecursiveBacktrackingMain
         {
             return;
         }
-        
+
         owo.add(sum);
-        
+
         if (index >= L.size())
         {
             return;
@@ -118,6 +118,26 @@ public class RecursiveBacktrackingMain
         return owo.get(owo.size() - 1);
     }
 
+    //
+    // Response 4: partitionable
+    //
+
+    public static boolean partitionableHelper(List<Integer> list, int index, int sum1, int sum2)
+    {
+        if (index == list.size())
+        {
+            return sum1 == sum2;
+        }
+        
+        return partitionableHelper(list, index + 1, sum1 + list.get(index), sum2)
+            || partitionableHelper(list, index + 1, sum1, sum2 + list.get(index));
+    }
+
+    public static boolean partitionable(List<Integer> list)
+    {
+        return partitionableHelper(list, 0, 0, 0);
+    }
+
     public static void main(String[] args)
     {
         travel(2, 2);
@@ -131,6 +151,13 @@ public class RecursiveBacktrackingMain
         L.add(1);
         L.add(14);
         System.out.println(maxSum(L, 19));
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(6);
+        System.out.println(partitionable(list));
     }
 
 }
