@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RecursiveBacktrackingMain
 {
@@ -79,10 +82,55 @@ public class RecursiveBacktrackingMain
         countBinaryHelper(0, n);
     }
 
+    //
+    // Response 3: maxSum
+    //
+
+    public static void maxSumHelper(List<Integer> L, int index, int limit, int sum, List<Integer> owo)
+    {
+        if (sum > limit)
+        {
+            return;
+        }
+        
+        owo.add(sum);
+        
+        if (index >= L.size())
+        {
+            return;
+        }
+
+        int num = L.get(index);
+        maxSumHelper(L, index + 1, limit, sum + num, owo);
+        maxSumHelper(L, index + 1, limit, sum, owo);
+    }
+
+    public static int maxSum(List<Integer> L, int n)
+    {
+        if (L.size() == 0 || n <= 0)
+        {
+            return 0;
+        }
+
+        List<Integer> owo = new ArrayList<>();
+        maxSumHelper(L, 0, n, 0, owo);
+        Collections.sort(owo);
+        return owo.get(owo.size() - 1);
+    }
+
     public static void main(String[] args)
     {
         travel(2, 2);
         countBinary(5);
+        List<Integer> L = new ArrayList<>();
+        L.add(7);
+        L.add(30);
+        L.add(8);
+        L.add(22);
+        L.add(6);
+        L.add(1);
+        L.add(14);
+        System.out.println(maxSum(L, 19));
     }
 
 }
