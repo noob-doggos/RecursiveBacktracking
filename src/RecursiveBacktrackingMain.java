@@ -8,6 +8,37 @@ public class RecursiveBacktrackingMain
     // Response 1: travel
     //
 
+    /**
+     * A helper method for travel. This method recursively computes via DFS, all
+     * possible paths that can be taken from 2D Cartesian coordinates (0,0) to
+     * (x,y) via three possible movements, one per step: NE (x+1,y+1), N (0,
+     * y+1) and E (x+1, 0).
+     * 
+     * recursion tree:
+     * 
+     * current node 
+     * |- go NE 
+     * |- go E 
+     * |- go N
+     * 
+     * levels of recursion: x + y
+     * 
+     * time complexity: O(3^(x + y))
+     * 
+     * space complexity: O(x + y)
+     * 
+     * @param x,
+     *            the horizontal positive coordinate of the point to navigate
+     *            to.
+     * @param y,
+     *            the vertical positive coordinate of the point to navigate to.
+     * @param pathCur
+     *            the previous paths taken to reach point (x, y), line
+     *            seperated, one path per line.
+     * @return a string containing all possible paths that can be taken from 2D
+     *         coordinates (0,0) to (x,y) using NE, N and E movements, one path
+     *         per line.
+     */
     public static String travelHelper(int x, int y, String pathCur)
     {
         // check base cases to return on.
@@ -57,6 +88,27 @@ public class RecursiveBacktrackingMain
     // Response 2: countBinary
     //
 
+    /**
+     * A helper method for the method countBinary. This method recursively
+     * prints all integers i...(2^n)-1, inclusive in base-2, one integer per
+     * line.
+     * 
+     * recursion tree:
+     * 
+     * current node 
+     * |- print binary for i + 1
+     * 
+     * levels of recursion: (2^n)-1
+     * 
+     * time complexity: O(2^n)
+     * 
+     * space complexity: O(2^n)
+     * 
+     * @param i,
+     *            the integer to start on, in base-10.
+     * @param n
+     *            the power n of the end integer to end on, (2^n)-1.
+     */
     public static void countBinaryHelper(int i, int n)
     {
         // base case: if n = 0, print only a blank line and return.
@@ -67,7 +119,7 @@ public class RecursiveBacktrackingMain
         }
 
         // hacky code using string manipulation to convert base-10 ints i and
-        // 2^(n-1) to string with base-2 equivalent padded with zeroes
+        // 2^(n-1) to string with base-2 equivalent left-padded with zeroes
         int maxNumSpaces = Integer.toBinaryString((int) Math.pow(2, n - 1)).length();
         String targetStr = String.format("%" + maxNumSpaces + "s", "").replaceAll(" ", "1");
         String binaryNum = Integer.parseInt(Integer.toBinaryString(i)) + "";
@@ -95,6 +147,38 @@ public class RecursiveBacktrackingMain
     // Response 3: maxSum
     //
 
+    /**
+     * A helper method for the method maxSum. This method modifies a
+     * List<Integer> called owo to add a list of all possible subset sums within
+     * List<Integer> L.
+     * 
+     * recursion tree:
+     * 
+     * current node 
+     * |- add next list element to subset sum 
+     * |- don't add next list to subset sum
+     * 
+     * levels of recursion: n, which equals L.size() - index
+     * 
+     * time complexity: O(2^n)
+     * 
+     * space complexity: O(n)
+     * 
+     * @param L
+     *            the list of integers to find all subset sums for.
+     * @param index
+     *            the 0-based index of list L to start finding subset sums at.
+     * @param limit
+     *            the maximum allowable limit for the subset sum to be added to
+     *            list owo.
+     * @param sum
+     *            the subset sum of the current instance of recursion. Should be
+     *            zero if first instance.
+     * @param owo
+     *            a blank list of integers which will be modified upon calling
+     *            this method to include all possible subset sums within list
+     *            L's indices index...limit.
+     */
     public static void maxSumHelper(List<Integer> L, int index, int limit, int sum, List<Integer> owo)
     {
         // toss out this instance if our sum has exceeded the limit, as there
@@ -139,6 +223,37 @@ public class RecursiveBacktrackingMain
     // Response 4: partitionable
     //
 
+    /**
+     * A helper method for the method partitionable. This method computes
+     * whether a given list of integers, list, is partitionable, meaning it can
+     * be split into two subsets with equal sum.
+     * 
+     * recursion tree:
+     * 
+     * current node 
+     * |- add current value to left sum 
+     * |- add current value to right sum
+     * 
+     * levels of recursion: n, which equals list.size() - index
+     * 
+     * time complexity: O(2^n)
+     * 
+     * space complexity: O(n)
+     * 
+     * @param list
+     *            the list of integers to determine partitionability.
+     * @param index
+     *            the zero-based index within list to begin determining
+     *            partitionabiilty at.
+     * @param sum1
+     *            the sum taken of the left subset for this instance. Should be
+     *            zero for first instance.
+     * @param sum2
+     *            the sum taken of the right subset for this instance. Should be
+     *            zero for first instance.
+     * @return a boolean value, true if list is partitionable, or false if list
+     *         is unpartitionable.
+     */
     public static boolean partitionableHelper(List<Integer> list, int index, int sum1, int sum2)
     {
         // if we have summed up all sub-lists within our list, we check whether
